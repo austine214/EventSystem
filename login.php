@@ -14,13 +14,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
         
-        // Verify hashed password
         if (password_verify($password, $user['password'])) {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['fullname'] = $user['fullname'];
             $_SESSION['role'] = $user['role'];
 
-            // Redirect based on role
             if ($user['role'] == 'admin') {
                 header("Location: admin_dashboard.php");
             } else {

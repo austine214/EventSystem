@@ -5,7 +5,7 @@ $message = ""; $message_type = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $fullname = mysqli_real_escape_string($conn, $_POST['fullname']);
     $username = mysqli_real_escape_string($conn, $_POST['username']);
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Secure hashing
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
     $check = $conn->query("SELECT id FROM users WHERE username = '$username'");
     if ($check->num_rows > 0) {

@@ -1,21 +1,17 @@
 <?php
-// Include your existing db.php connection file
 include 'db.php';
 
 echo "<div style='font-family: Arial; padding: 20px; border-radius: 10px; border: 1px solid #ddd; max-width: 500px; margin: 50px auto;'>";
 echo "<h2 style='color: #333;'>Database Connection Test</h2>";
 
-// 1. Check if the connection variable exists
 if (!$conn) {
     echo "<p style='color: red;'>❌ <strong>Error:</strong> Connection variable \$conn is not defined.</p>";
 } else {
-    // 2. Check if the connection is alive
     if ($conn->connect_error) {
         echo "<p style='color: red;'>❌ <strong>Connection Failed:</strong> " . $conn->connect_error . "</p>";
     } else {
         echo "<p style='color: green;'>✅ <strong>Success:</strong> Connected to database <u>" . $dbname . "</u> successfully!</p>";
 
-        // 3. Test a simple query (Count Users)
         $result = $conn->query("SELECT COUNT(*) as total FROM users");
         
         if ($result) {

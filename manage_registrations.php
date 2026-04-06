@@ -7,7 +7,6 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     exit();
 }
 
-// Confirmation Logic
 if (isset($_GET['confirm_id'])) {
     $reg_id = intval($_GET['confirm_id']);
     $conn->query("UPDATE registrations SET status = 'confirmed' WHERE id = $reg_id");

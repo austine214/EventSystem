@@ -2,11 +2,9 @@
 session_start();
 include 'db.php';
 
-// Fetch all upcoming events - Now including the 'image' column
 $query = "SELECT * FROM events WHERE event_date >= CURDATE() ORDER BY event_date ASC";
 $result = $conn->query($query);
 
-// Logic for Registration Click
 $msg = "";
 if (isset($_GET['register_id'])) {
     if (!isset($_SESSION['user_id'])) {
@@ -17,7 +15,6 @@ if (isset($_GET['register_id'])) {
     $user_id = $_SESSION['user_id'];
     $event_id = intval($_GET['register_id']);
 
-    // Check if already registered
     $check = $conn->query("SELECT id FROM registrations WHERE user_id = $user_id AND event_id = $event_id");
     
     if ($check->num_rows > 0) {
@@ -37,7 +34,7 @@ if (isset($_GET['register_id'])) {
     <meta charset="UTF-8">
     <title>EventHub | Browse Events</title>
     <style>
-        :root { --primary: #4e73df; --bg: #f8f9fc; --border: #eaecf4; --text: #3a3b45; }
+        :root { --primary: #6366f1; --bg: #f8f9fc; --border: #eaecf4; --text: #3a3b45; }
         body { font-family: 'Inter', sans-serif; background: var(--bg); margin: 0; color: var(--text); }
         
         .navbar { background: white; padding: 15px 50px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }

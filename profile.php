@@ -2,7 +2,6 @@
 session_start();
 include 'db.php';
 
-// Redirect if not logged in
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
@@ -11,11 +10,9 @@ if (!isset($_SESSION['user_id'])) {
 $user_id = $_SESSION['user_id'];
 $msg = "";
 
-// --- LOGIC: CANCEL REGISTRATION ---
 if (isset($_GET['cancel_id'])) {
     $reg_id = intval($_GET['cancel_id']);
     
-    // Security check: Ensure the registration belongs to the logged-in user
     $delete_query = "DELETE FROM registrations WHERE id = $reg_id AND user_id = $user_id";
     
     if ($conn->query($delete_query)) {
@@ -23,10 +20,8 @@ if (isset($_GET['cancel_id'])) {
     }
 }
 
-// Fetch user details
 $user = $conn->query("SELECT * FROM users WHERE id = $user_id")->fetch_assoc();
 
-// Fetch user's event registrations
 $my_events = $conn->query("
     SELECT r.id as reg_id, e.title, e.event_date, e.location, r.status 
     FROM registrations r 
